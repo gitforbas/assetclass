@@ -1,0 +1,71 @@
+<mvc:View controllerName="com.test.project2.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" 
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartList="sap.ui.comp.smartlist"
+    xmlns:smartTable="sap.ui.comp.smarttable">
+    <Page id="page" title="{i18n>title}">
+        <content>
+        <smartFilterBar:SmartFilterBar id="smartFilterBar" persistencyKey="UniqueAndStablePersistencyKey" entitySet="ZP_PF_BRK_ASSETCLS" >
+        	<smartFilterBar:controlConfiguration>
+				<smartFilterBar:ControlConfiguration key="AssetClass"  visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false"> 
+				</smartFilterBar:ControlConfiguration>
+			
+                <smartFilterBar:ControlConfiguration key="AssetReady" visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false">
+				</smartFilterBar:ControlConfiguration>
+
+                <smartFilterBar:ControlConfiguration key="AssetShell" visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false">
+				</smartFilterBar:ControlConfiguration>
+
+                  <smartFilterBar:ControlConfiguration key="EstCapitalDate" visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false">
+                </smartFilterBar:ControlConfiguration>
+
+                <smartFilterBar:ControlConfiguration key="Location" visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false">
+				</smartFilterBar:ControlConfiguration>
+				
+                <smartFilterBar:ControlConfiguration key="Equipment" visibleInAdvancedArea="true"
+				preventInitialDataFetchInValueHelpDialog="false">
+			    </smartFilterBar:ControlConfiguration>
+                
+			</smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+        <!-- <smartList:SmartList id="smartProductList" smartFilter="smartFilterBar" entitySet="ZP_PF_BRK_ASSETCLS"  header="Products List" showRowCount="true" showFullScreenButton="true" enableAutoBinding="true">
+            <smartList:listItemTemplate>
+                <StandardListItem id="listTemplate" type="Navigation" press="handleListItemPress" title="{AssetClass}"  description="{AssetDescription}" />
+            </smartList:listItemTemplate>
+        </smartList:SmartList> -->
+
+        <smartTable:SmartTable id="LineItemsSmartTable" entitySet="ZP_PF_BRK_ASSETCLS" smartFilterId="smartFilterBar" initiallyVisibleFields="AssetClass,AssetDescription,ExpLeaseEndDt,Location,AssetReady,Equipment,NoOfAssets,ExpInSrvDate,EstCapitalDate,DepCostCenter"
+        tableType="ResponsiveTable" enableExport="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Breakout Asset Class" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="false">
+				<!-- layout data used to make the table growing but the filter bar fixed -->
+				<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+				<Button text="Create New" tooltip="Create New Asset" press="createNewAsset"/>
+                <Button text="Copy" tooltip="Copy" press="onCopy"/>
+                  <Button text="Delete" tooltip="Delete" press="onDelete"/>
+				
+			</OverflowToolbar>
+		</smartTable:customToolbar>
+                
+                <smartTable:layoutData>
+					<FlexItemData id="FI" growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+                <!-- <Table id="employeeTableId" selectionChange="handleListItemPress" mode="MultiSelect" > -->
+                 <Table id="employeeTableId"  mode="MultiSelect" >
+                			<items>
+				<ColumnListItem type="Navigation" press="handleListItemPress" />
+					
+				
+			</items>
+                    </Table>
+			</smartTable:SmartTable>
+        </content>
+    </Page>
+</mvc:View>
